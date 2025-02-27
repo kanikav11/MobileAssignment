@@ -9,7 +9,6 @@ import Foundation
 
 class ApiService : NSObject {
     private let baseUrl = ""
-    
     private let sourcesURL = URL(string: "https://api.restful-api.dev/objects")!
     
     func fetchDeviceDetails(completion : @escaping ([DeviceData]) -> ()){
@@ -26,6 +25,8 @@ class ApiService : NSObject {
                 if (empData.isEmpty) {
                     completion([])
                     // Error
+                }else{
+                    completion(empData)
                 }
             }
         }.resume()

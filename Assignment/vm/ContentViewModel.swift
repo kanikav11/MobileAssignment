@@ -7,17 +7,17 @@
 
 import Foundation
 
-
 class ContentViewModel : ObservableObject {
     
     private let apiService = ApiService()
     @Published var navigateDetail: DeviceData? = nil
     var data: [DeviceData]? = []
 
-    func fetchAPI() {
-        apiService.fetchDeviceDetails(completion: { item in
-            self.data = item
-        })
+    func fetchAPI(completion : @escaping (Bool) -> ()) {
+        DataService.sharedInstance.fetchDeviceDetails { data in
+            self.data = data
+            completion(true)
+        }
     }
     
     func navigateToDetail(navigateDetail: DeviceData) {
